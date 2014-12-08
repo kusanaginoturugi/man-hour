@@ -23,7 +23,7 @@
         <td><%= job.detail %></td>
         <td><%= job.cost %></td>
         <td><%= job.place %></td>
-        <td><%= (job.end_date - job.begin_date) / 60 %></td>
+        <td><%= sprintf( "%.3f", (job.end_date - job.begin_date) / 60 / 60 ) %></td>
         <td><%= job.begin_date %></td>
         <td><%= job.end_date %></td>
         <td><%= link_to 'Show', job %></td>
