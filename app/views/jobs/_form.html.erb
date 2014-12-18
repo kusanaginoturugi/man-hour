@@ -13,7 +13,8 @@
 
   <div class="field">
     <%= f.label :job_type_id %><br>
-    <%= f.number_field :job_type_id %>
+    <% @job_types = JobType.all %>
+    <%= f.select :job_type_id, @job_types.map{|t| [t.name, t.id]} %>
   </div>
   <div class="field">
     <%= f.label :title %><br>

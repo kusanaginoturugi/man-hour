@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :job_types
+
   resources :jobs
 
   root 'welcome#index'
