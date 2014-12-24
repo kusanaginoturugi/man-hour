@@ -1,3 +1,4 @@
+# coding: utf-8
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
 
@@ -5,6 +6,31 @@ class JobsController < ApplicationController
   # GET /jobs.json
   def index
     @jobs = Job.all
+  end
+
+  # GET /jobs/report
+  # GET /jobs/report.pdf
+  def report
+    @date = DateTime.parse(params[:begin_date])
+    @jobs = Job.monthly(@date)
+    @job_summery = Job.summery(@date)
+    respond_to do |format|
+      format.html
+      format.pdf do
+         render pdf:    'jobs_pdf',
+             layout:    'printer.html',
+             template:  'jobs/report_pdf.html.erb',
+             page_size: 'A4',
+             orientation: 'Landscape',
+             margin:  { top: 15, bottom: 15, left: 10, right: 10 },
+             header:  { font_size: 10,
+                             line: true,
+                             left: "冬水社 作業報告書 「#{@date.year}年#{@date.month}月」" },
+             footer:  { font_size: 10,
+                             line: true,
+                           center: '[page] of [topage]' }
+      end
+    end
   end
 
   # GET /jobs/1

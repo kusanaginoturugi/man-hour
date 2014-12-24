@@ -2,9 +2,13 @@ Rails.application.routes.draw do
 
   resources :job_types
 
-  resources :jobs
+  resources :jobs do
+    collection do
+      get 'report'
+    end
+  end
 
-  root 'welcome#index'
+  root 'jobs#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

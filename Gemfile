@@ -1,5 +1,5 @@
+# coding: utf-8
 source 'https://rubygems.org'
-
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
@@ -36,8 +36,14 @@ gem 'spring',        group: :development
 # gem 'capistrano-rails', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+gem 'debugger2', group: [:development, :test]
 
 gem 'rails_12factor', group: :production
 
+gem 'rails-i18n'
+
 ruby '2.1.5'
+
+# PDF生成
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
