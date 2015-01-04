@@ -8,9 +8,9 @@
       <th><%= t('activerecord.attributes.job_type.name') %></th>
       <th><%= t('activerecord.attributes.job.title') %></th>
       <th><%= t('activerecord.attributes.job.detail') %></th>
-      <th><%= t('activerecord.attributes.job.worktime') %></th>
       <th><%= t('activerecord.attributes.job.begin_date') %></th>
       <th><%= t('activerecord.attributes.job.end_date') %></th>
+      <th><%= t('activerecord.attributes.job.worktime') %></th>
     </tr>
   </thead>
 
@@ -20,10 +20,18 @@
         <td><%= job.job_type.name %></td>
         <td><%= job.title %></td>
         <td><%= job.detail %></td>
-        <td><%= sprintf( "%.3f", (job.end_date - job.begin_date) / 60 / 60 ) %></td>
         <td><%= job.begin_date %></td>
         <td><%= job.end_date %></td>
+        <td><%= sprintf( "%.3f", job.worktime ) %></td>
       </tr>
     <% end %>
+      <tr>
+        <td rowspan="5"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><%= t('label.sum') %></td>
+        <td><%= sprintf( "%.3f", @jobs.sum(:worktime) ) %></td>
+      </tr>
   </tbody>
 </table>
