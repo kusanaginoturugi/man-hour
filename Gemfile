@@ -42,7 +42,7 @@ gem 'rails_12factor', group: :production
 
 gem 'rails-i18n'
 
-ruby '2.1.5'
+ruby '2.2.0'
 
 # PDF生成
 gem 'wicked_pdf'

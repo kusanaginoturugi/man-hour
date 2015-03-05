@@ -22,6 +22,9 @@
 ja:
 
   title:
+    New_job: 作業報告新規作成
+    Editing_job: 作業時間編集
+    Listing_jobs: 作業時間一覧
     monthly_jobs_report: 月次作業報告書
 
   label:
@@ -29,22 +32,27 @@ ja:
     prev_report: 前月
     next_report: 翌月
     sum:         合計
+    work_minutes: 作業時間(分)
+    Back:        戻る
 
   activerecord:
     models:
-      job_type: ジョブ区分
+      job_type: ジョブ種類
       job:      ジョブ
     attributes:
       job_type:
         name: 対応
       job:
+        job_type_id: ジョブ種類
         title:      タイトル
         detail:     詳細
         cost:       コスト
         place:      作業場所
+        outside_budget: 別予算
         begin_date: 開始時刻
         end_date:   終了時刻
         worktime:   作業時間
+        work_minutes:  作業時間(分)
 
   button:
     Create: 新規登録実行

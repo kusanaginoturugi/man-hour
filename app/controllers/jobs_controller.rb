@@ -95,6 +95,6 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:job_type_id, :title, :detail, :cost, :place, :begin_date, :end_date)
+      params.require(:job).permit(:job_type_id, :title, :detail, :outside_budget, :cost, :place, :begin_date, :end_date, :work_minutes)
     end
 end

@@ -22,24 +22,34 @@
   </div>
   <div class="field">
     <%= f.label :detail %><br>
-    <%= f.text_area :detail %>
+    <%= f.text_area :detail, size: "40x10" %>
   </div>
   <div class="field">
-    <%= f.label :cost %><br>
-    <%= f.number_field :cost %>
-  </div>
-  <div class="field">
-    <%= f.label :place %><br>
-    <%= f.text_field :place %>
+    <%= f.label :outside_budget %><br>
+    <%= f.check_box :outside_budget %>
   </div>
   <div class="field">
     <%= f.label :begin_date %><br>
     <%= f.datetime_select :begin_date %>
   </div>
   <div class="field">
+    <%= f.label :work_minutes %><br>
+    <%= f.text_field :work_minutes, size: "3" %>
+  </div>
+<!--
+  <div class="field">
     <%= f.label :end_date %><br>
     <%= f.datetime_select :end_date %>
   </div>
+  <div class="field">
+    <%= f.label :cost %><br>
+    <%= f.text_field :cost, size: "3" %>
+  </div>
+  <div class="field">
+    <%= f.label :place %><br>
+    <%= f.text_field :place, size: "5" %>
+  </div>
+-->
   <div class="actions">
     <%= f.submit %>
   </div>

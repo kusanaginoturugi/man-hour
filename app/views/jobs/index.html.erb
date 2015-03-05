@@ -1,4 +1,4 @@
-<h1>Listing jobs</h1>
+<h1><%= t('title.Listing_jobs') %></h1>
 
 <table class="table table-striped">
   <thead>
@@ -6,8 +6,7 @@
       <th><%= t('activerecord.attributes.job_type.name') %></th>
       <th><%= t('activerecord.attributes.job.title') %></th>
       <th><%= t('activerecord.attributes.job.detail') %></th>
-      <th><%= t('activerecord.attributes.job.cost') %></th>
-      <th><%= t('activerecord.attributes.job.place') %></th>
+      <th><%= t('activerecord.attributes.job.outside_budget') %></th>
       <th><%= t('activerecord.attributes.job.worktime') %></th>
       <th><%= t('activerecord.attributes.job.begin_date') %></th>
       <th><%= t('activerecord.attributes.job.end_date') %></th>
@@ -21,9 +20,8 @@
         <td><%= job.job_type.name %></td>
         <td><%= job.title %></td>
         <td><%= job.detail %></td>
-        <td><%= job.cost %></td>
-        <td><%= job.place %></td>
-        <td><%= sprintf( "%.3f", (job.end_date - job.begin_date) / 60 / 60 ) %></td>
+        <td><%= job.outside_budget %></td>
+        <td><%= job.worktime %></td>
         <td><%= job.begin_date %></td>
         <td><%= job.end_date %></td>
         <td><%= link_to 'Show', job, class: "btn btn-normal btn-block" %></td>
@@ -36,5 +34,5 @@
 
 <br>
 
-<%= link_to 'New Job', new_job_path %>
-<%= link_to t('title.Monthly_Jobs_Report'), action: "report", begin_date: @jobs.last.begin_date %>
+<%= link_to t('title.New_job'), new_job_path %>
+<%= link_to t('title.monthly_jobs_report'), action: "report", begin_date: @jobs.last.begin_date %>
