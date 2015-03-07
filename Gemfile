@@ -30,7 +30,7 @@ gem 'spring',        group: :development
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -47,3 +47,6 @@ ruby '2.2.0'
 # PDF生成
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+
+# ページネーション
+gem 'kaminari'
