@@ -6,7 +6,7 @@
       <th><%= t('activerecord.attributes.job_type.name') %></th>
       <th><%= t('activerecord.attributes.job.title') %></th>
       <th><%= t('activerecord.attributes.job.detail') %></th>
-      <th><%= t('activerecord.attributes.job.outside_budget) %></th>
+      <th><%= t('activerecord.attributes.job.outside_budget') %></th>
       <th><%= t('activerecord.attributes.job.begin_date') %></th>
       <th><%= t('activerecord.attributes.job.end_date') %></th>
       <th><%= t('activerecord.attributes.job.worktime') %></th>
@@ -27,9 +27,6 @@
       <% end %>
       <tr>
         <td rowspan="5"></td>
-        <td></td>
-        <td></td>
-        <td></td>
         <td><%= t('label.sum') %></td>
         <td><%= sprintf( "%.3f", @jobs.sum(:worktime) ) %></td>
       </tr>
