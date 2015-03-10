@@ -28,10 +28,7 @@
       </tr>
     <% end %>
       <tr>
-        <td rowspan="5"></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td colspan="5"></td>
         <td><%= t('label.sum') %></td>
         <td><%= sprintf( "%.3f", @jobs.where('outside_budget = false').sum(:worktime) ) %></td>
       </tr>
