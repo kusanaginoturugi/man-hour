@@ -50,3 +50,6 @@ gem 'wkhtmltopdf-binary'
 
 # ページネーション
 gem 'kaminari'
+
+# モデル作成
+gem 'rails-erd', group: [:development]

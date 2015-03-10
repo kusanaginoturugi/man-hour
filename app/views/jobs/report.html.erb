@@ -1,5 +1,7 @@
 <h1><%= t('title.monthly_jobs_report') %></h1>
 
+<h4><%= @date.year %> 年 <%= @date.mon %> 月分</h4>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -24,11 +26,11 @@
         <td><%= job.end_date %></td>
         <td><%= sprintf( "%.3f", job.worktime ) %></td>
       </tr>
-      <% end %>
+    <% end %>
       <tr>
-        <td rowspan="5"></td>
+        <td colspan="5"></td>
         <td><%= t('label.sum') %></td>
-        <td><%= sprintf( "%.3f", @jobs.sum(:worktime) ) %></td>
+        <td><%= sprintf( "%.3f", @jobs.where('outside_budget = false').sum(:worktime) ) %></td>
       </tr>
   </tbody>
 </table>
