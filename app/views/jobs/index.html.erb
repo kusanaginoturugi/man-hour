@@ -19,7 +19,7 @@
       <tr>
         <td><%= job.job_type.name %></td>
         <td><%= job.title %></td>
-        <td><%= job.detail %></td>
+        <td><%= simple_format(job.detail) %></td>
         <td><%= job.outside_budget %></td>
         <td><%= job.worktime %></td>
         <td><%= job.begin_date %></td>
