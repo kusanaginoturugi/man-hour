@@ -33,7 +33,7 @@
         <td></td>
         <td></td>
         <td><%= t('label.sum') %></td>
-        <td><%= sprintf( "%.3f", @jobs.sum(:worktime) ) %></td>
+        <td><%= sprintf( "%.3f", @jobs.where('outside_budget = false').sum(:worktime) ) %></td>
       </tr>
   </tbody>
 </table>
