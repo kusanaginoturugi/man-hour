@@ -13,9 +13,41 @@ class Job < ActiveRecord::Base
   end
 
   before_save do
-    if self.begin_date.present? and self.work_minutes.present? then
+    if self.begin_date.present? and self.work_minutes.present?
       self.end_date = self.begin_date + self.work_minutes.to_i * 60
     end
     self.worktime = (self.end_date - self.begin_date) / 60 / 60
+  end
+
+  after_save do
+    summary_save(self.begin_date.year, self.begin_date.month, self.begin_date)
+  end
+
+  def summary_save(year, month, date)
+    prev_date  = date.prev_month
+    prev_year  = prev_date.year
+    prev_month = prev_date.month
+    begin_at   = date.beginning_of_month
+    end_at     = date.next_month.beginning_of_month
+    amount     = Job.where(begin_date: begin_at..end_at, outside_budget: false).sum(:worktime)
+    loop do
+      msum       = MonthlySummary.where(year: year, month: month).first
+      msum_prev  = MonthlySummary.where(year: prev_year, month: prev_month).first
+      if msum.blank? and msum_prev.blank?
+        summary_save(prev_year, prev_month, prev_date)
+      end
+      if msum.blank? and msum_prev.present?
+        MonthlySummary.create(year: year, month: month, begin_at: begin_at, end_at: end_at, carryover_amount: msum_prev.amount, this_month_amount: amount, amount: msum_prev.amount + amount - 18)
+        break
+      elsif msum.present? and msum_prev.present?
+        msum.begin_at = begin_at
+        msum.end_at   = end_at
+        msum.carryover_amount  = msum_prev.amount
+        msum.this_month_amount = amount
+        msum.amount            = msum_prev.amount + amount - 18
+        msum.save
+        break
+      end
+    end
   end
 end

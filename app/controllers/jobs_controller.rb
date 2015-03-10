@@ -14,6 +14,7 @@ class JobsController < ApplicationController
     @date = DateTime.parse(params[:begin_date])
     @jobs = Job.monthly(@date)
     @job_summery = Job.summery(@date)
+    @monthly_summary = MonthlySummary.where(year: @date.year, month: @date.month).first
     respond_to do |format|
       format.html
       format.pdf do

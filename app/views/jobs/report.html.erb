@@ -2,6 +2,28 @@
 
 <h4><%= @date.year %> 年 <%= @date.mon %> 月分</h4>
 
+<div class="row">
+  <div class="col-md-4">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>前月繰越</th>
+          <th>当月合計</th>
+          <th>繰越</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= sprintf( "%.3f", @monthly_summary.carryover_amount ) %></td>
+          <td><%= sprintf( "%.3f", @monthly_summary.this_month_amount ) %></td>
+          <td><%= sprintf( "%.3f", @monthly_summary.amount ) %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-8"></div>
+</div>
+
 <table class="table table-striped">
   <thead>
     <tr>

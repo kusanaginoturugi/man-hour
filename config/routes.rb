@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :monthly_summaries
+
   resources :job_types
 
   resources :jobs do

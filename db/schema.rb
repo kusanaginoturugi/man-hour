@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150305080336) do
+ActiveRecord::Schema.define(version: 20150310024358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,18 @@ ActiveRecord::Schema.define(version: 20150305080336) do
     t.datetime "updated_at"
     t.float    "worktime"
     t.boolean  "outside_budget"
+  end
+
+  create_table "monthly_summaries", force: true do |t|
+    t.integer  "year"
+    t.integer  "month"
+    t.datetime "begin_at"
+    t.datetime "end_at"
+    t.float    "carryover_amount"
+    t.float    "this_month_amount"
+    t.float    "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @monthly_summary.year %>
+</p>
+
+<p>
+  <strong>Month:</strong>
+  <%= @monthly_summary.month %>
+</p>
+
+<p>
+  <strong>Begin at:</strong>
+  <%= @monthly_summary.begin_at %>
+</p>
+
+<p>
+  <strong>End at:</strong>
+  <%= @monthly_summary.end_at %>
+</p>
+
+<p>
+  <strong>Carryover amount:</strong>
+  <%= @monthly_summary.carryover_amount %>
+</p>
+
+<p>
+  <strong>This month amount:</strong>
+  <%= @monthly_summary.this_month_amount %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @monthly_summary.amount %>
+</p>
+
+<%= link_to 'Edit', edit_monthly_summary_path(@monthly_summary) %> |
+<%= link_to 'Back', monthly_summaries_path %>
