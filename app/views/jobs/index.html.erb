@@ -21,12 +21,12 @@
         <td><%= job.title %></td>
         <td><%= simple_format(job.detail) %></td>
         <td><%= job.outside_budget %></td>
-        <td><%= job.worktime %></td>
+        <td><%= sprintf( "%.3f", job.worktime ) %></td>
         <td><%= job.begin_date %></td>
         <td><%= job.end_date %></td>
-        <td><%= link_to 'Show', job, class: "btn btn-normal btn-block" %></td>
-        <td><%= link_to 'Edit', edit_job_path(job), class: "btn btn-normal btn-block" %></td>
-        <td><%= link_to 'Destroy', job, class: "btn btn-normal btn-block", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', job, class: "btn btn-normal" %></td>
+        <td><%= link_to 'Edit', edit_job_path(job), class: "btn btn-normal" %></td>
+        <td><%= link_to 'Destroy', job, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
