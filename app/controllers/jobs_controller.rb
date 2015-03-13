@@ -5,7 +5,12 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all.page(params[:page])
+    param = params[:page]
+    @jobs = Job.page(param)
+    if param.blank?
+      last_page = @jobs.num_pages
+      @jobs = Job.page(last_page)
+    end
   end
 
   # GET /jobs/report

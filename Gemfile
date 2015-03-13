@@ -1,6 +1,8 @@
 # coding: utf-8
 source 'https://rubygems.org'
 
+ruby '2.2.1'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
 # Use postgresql as the database for Active Record
@@ -41,8 +43,6 @@ gem 'debugger2', group: [:development, :test]
 gem 'rails_12factor', group: :production
 
 gem 'rails-i18n'
-
-ruby '2.2.0'
 
 # PDF生成
 gem 'wicked_pdf'

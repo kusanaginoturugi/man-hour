@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root 'jobs#index'
+
   resources :monthly_summaries
 
   resources :job_types
@@ -10,7 +12,6 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'jobs#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
