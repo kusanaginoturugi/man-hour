@@ -24,8 +24,8 @@
         <td><%= sprintf( "%.3f", job.worktime ) %></td>
         <td><%= job.begin_date %></td>
         <td><%= job.end_date %></td>
-        <td><%= link_to 'Show', job, class: "btn btn-normal" %></td>
-        <td><%= link_to 'Edit', edit_job_path(job), class: "btn btn-normal" %></td>
+        <td><%= link_to 'Show', job, class: "btn btn-default" %></td>
+        <td><%= link_to 'Edit', edit_job_path(job), class: "btn btn-default" %></td>
         <td><%= link_to 'Destroy', job, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
