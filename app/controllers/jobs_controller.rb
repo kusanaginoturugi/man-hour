@@ -5,12 +5,27 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    param = params[:page]
-    @jobs = Job.page(param)
-    if param.blank?
-      last_page = @jobs.num_pages
-      @jobs = Job.page(last_page)
+#    param = params[:page]
+    customer_id = session['selected_customer']
+    tgt_date = DateTime.parse(session['tgt_date'])
+    if tgt_date.blank?
+      tgt_date = Time.now
     end
+    if params[:month].present?
+      if params[:month] == 'prev'
+        tgt_date = tgt_date.prev_month
+      elsif params[:month] == 'next'
+        tgt_date = tgt_date.next_month
+      end
+    end
+    session['tgt_date'] = tgt_date
+    date_from = tgt_date.beginning_of_month
+    date_to = tgt_date.end_of_month
+    @jobs = Job.where(customer_id: customer_id, begin_date: (date_from)..(date_to))
+    # if param.blank?
+    #   last_page = @jobs.num_pages
+    #   @jobs = Job.page(last_page)
+    # end
   end
 
   # GET /jobs/report
@@ -101,6 +116,6 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:job_type_id, :title, :detail, :outside_budget, :cost, :place, :begin_date, :end_date, :work_minutes)
+      params.require(:job).permit(:job_type_id, :title, :detail, :outside_budget, :cost, :place, :begin_date, :end_date, :work_minutes, :customer_id)
     end
 end

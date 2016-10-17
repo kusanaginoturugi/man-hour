@@ -1,0 +1,34 @@
+<h1>Listing customers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Short name</th>
+      <th>Name</th>
+      <th>Post</th>
+      <th>Address1</th>
+      <th>Address2</th>
+      <th>Rep</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= customer.short_name %></td>
+        <td><%= customer.name %></td>
+        <td><%= customer.post %></td>
+        <td><%= customer.address1 %></td>
+        <td><%= customer.address2 %></td>
+        <td><%= customer.rep %></td>
+        <td><%= link_to 'Select', select_customer_path(customer) %></td>
+} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Customer', new_customer_path %>

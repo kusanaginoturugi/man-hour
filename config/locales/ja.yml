@@ -39,6 +39,7 @@ ja:
     models:
       job_type: ジョブ種類
       job:      ジョブ
+      customer: 顧客
     attributes:
       job_type:
         name: 対応
@@ -53,6 +54,8 @@ ja:
         end_date:   終了時刻
         worktime:   作業時間
         work_minutes:  作業時間(分)
+      customer:
+        short_name: 顧客名
 
   button:
     Create: 新規登録実行

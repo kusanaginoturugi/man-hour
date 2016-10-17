@@ -1,7 +1,7 @@
 # coding: utf-8
 source 'https://rubygems.org'
 
-ruby '2.2.1'
+ruby '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
@@ -37,9 +37,6 @@ gem 'unicorn'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# Use debugger
-gem 'debugger2', group: [:development, :test]
-
 gem 'rails_12factor', group: :production
 
 gem 'rails-i18n'
@@ -51,5 +48,8 @@ gem 'wkhtmltopdf-binary'
 # ページネーション
 gem 'kaminari'
 
-# モデル作成
-gem 'rails-erd', group: [:development]
+group :development do
+  # モデル作成
+  gem 'rails-erd'
+  gem 'byebug'
+end

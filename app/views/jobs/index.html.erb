@@ -1,16 +1,22 @@
-<h1><%= t('title.Listing_jobs') %></h1>
+﻿<h1><%= t('title.Listing_jobs') %></h1>
+
+<a href='/jobs/?month=prev'>先月</a>|
+<% tgt_date = session['tgt_date'] %>
+<%= "#{tgt_date.year}年 #{tgt_date.month}月" %>
+|<a href='/jobs/?month=next'>翌月</a>
 
 <table class="table table-striped">
   <thead>
     <tr>
       <th><%= t('activerecord.attributes.job_type.name') %></th>
+      <th><%= t('activerecord.attributes.customer.short_name') %></th>
       <th><%= t('activerecord.attributes.job.title') %></th>
       <th><%= t('activerecord.attributes.job.detail') %></th>
       <th><%= t('activerecord.attributes.job.outside_budget') %></th>
       <th><%= t('activerecord.attributes.job.worktime') %></th>
       <th><%= t('activerecord.attributes.job.begin_date') %></th>
       <th><%= t('activerecord.attributes.job.end_date') %></th>
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -18,22 +24,26 @@
     <% @jobs.each do |job| %>
       <tr>
         <td><%= job.job_type.name %></td>
+        <td><%= job.customer.short_name %></td>
         <td><%= job.title %></td>
         <td><%= simple_format(job.detail) %></td>
         <td><%= job.outside_budget %></td>
         <td><%= sprintf( "%.3f", job.worktime ) %></td>
         <td><%= job.begin_date %></td>
         <td><%= job.end_date %></td>
-        <td><%= link_to 'Show', job, class: "btn btn-default" %></td>
-        <td><%= link_to 'Edit', edit_job_path(job), class: "btn btn-default" %></td>
-        <td><%= link_to 'Destroy', job, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to 'Show', job, class: "btn btn-default" %>
+          <%= link_to 'Edit', edit_job_path(job), class: "btn btn-default" %>
+          <%= link_to 'Destroy', job, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<%= paginate @jobs %>
 
 <br>
 
 <%= link_to t('title.New_job'), new_job_path %>
+<% if @jobs.last.present? %>
 <%= link_to t('title.monthly_jobs_report'), action: "report", begin_date: @jobs.last.begin_date %>
+<% end %>

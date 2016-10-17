@@ -2,6 +2,7 @@
 class Job < ActiveRecord::Base
   attr_accessor :work_minutes
   belongs_to :job_type
+  belongs_to :customer
 
   # スコープ
   default_scope -> { order('begin_date') }

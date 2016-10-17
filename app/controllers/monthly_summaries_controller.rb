@@ -69,6 +69,6 @@ class MonthlySummariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def monthly_summary_params
-      params.require(:monthly_summary).permit(:year, :month, :begin_at, :end_at, :carryover_amount, :this_month_amount, :amount)
+      params.require(:monthly_summary).permit(:year, :month, :begin_at, :end_at, :carryover_amount, :this_month_amount, :amount, :customer_id)
     end
 end
