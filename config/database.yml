@@ -24,3 +24,7 @@ default: &default
 development:
   <<: *default
   database: man-hour_development
+
+test:
+  <<: *default
+  database: man-hour_test
