@@ -1,2 +1,9 @@
-ruby:
-  - "2.3.1"
+language: ruby
+
+rvm:
+  - 2.3.1
+
+before_script:
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
+  - bundle exec rake db:seed
