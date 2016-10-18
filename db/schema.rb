@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20150330021314) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "customers", force: true do |t|
+  create_table "customers", force: :cascade do |t|
     t.string   "short_name"
     t.string   "name"
     t.string   "post"
@@ -27,13 +27,13 @@ ActiveRecord::Schema.define(version: 20150330021314) do
     t.datetime "updated_at"
   end
 
-  create_table "job_types", force: true do |t|
+  create_table "job_types", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "jobs", force: true do |t|
+  create_table "jobs", force: :cascade do |t|
     t.integer  "job_type_id"
     t.string   "title"
     t.text     "detail"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20150330021314) do
     t.integer  "customer_id"
   end
 
-  create_table "monthly_summaries", force: true do |t|
+  create_table "monthly_summaries", force: :cascade do |t|
     t.integer  "year"
     t.integer  "month"
     t.datetime "begin_at"

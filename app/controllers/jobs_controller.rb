@@ -5,11 +5,13 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-#    param = params[:page]
-    customer_id = session['selected_customer']
-    tgt_date = DateTime.parse(session['tgt_date'])
-    if tgt_date.blank?
-      tgt_date = Time.now
+    #    param = params[:page]
+    if session['selected_customer'].present?
+      customer_id = session['selected_customer']
+    end
+    tgt_date = Time.now
+    if session['tgt_date'].present?
+      tgt_date = DateTime.parse(session['tgt_date'])
     end
     if params[:month].present?
       if params[:month] == 'prev'

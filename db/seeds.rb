@@ -15,8 +15,8 @@ JobType.create([
                ])
 
 Customer.create([
-                  { id:1, short_name:'冬水社' },
-                  { id:2, short_name:'要法寺' }
+                  { id:1, short_name:'NTT中日本' },
+                  { id:2, short_name:'JR中日本' }
                 ])
 
 # Job.create([
