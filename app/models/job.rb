@@ -21,32 +21,38 @@ class Job < ActiveRecord::Base
   end
 
   after_save do
-    summary_save(self.begin_date.year, self.begin_date.month, self.begin_date)
+    summary_save(self.begin_date)
   end
 
-  def summary_save(year, month, date)
+  def summary_save(date)
+    year       = date.year
+    month      = date.month
+
     prev_date  = date.prev_month
     prev_year  = prev_date.year
     prev_month = prev_date.month
-    begin_at   = date.beginning_of_month
-    end_at     = date.next_month.beginning_of_month
+
+    begin_at   = date.beginning_of_month.beginning_of_day
+    end_at     = date.end_of_month.end_of_day
     amount     = Job.where(begin_date: begin_at..end_at, outside_budget: false).sum(:worktime)
     loop do
-      msum       = MonthlySummary.where(year: year, month: month).first
-      msum_prev  = MonthlySummary.where(year: prev_year, month: prev_month).first
+      w_hours   = 18
+      msum      = MonthlySummary.where(year: year, month: month).first
+      msum_prev = MonthlySummary.where(year: prev_year, month: prev_month).first
       if msum.blank? and msum_prev.blank?
-        summary_save(prev_year, prev_month, prev_date)
-      end
-      if msum.blank? and msum_prev.present?
-        MonthlySummary.create(year: year, month: month, begin_at: begin_at, end_at: end_at, carryover_amount: msum_prev.amount, this_month_amount: amount, amount: msum_prev.amount + amount - 18)
+        MonthlySummary.create(year: year, month: month, begin_at: begin_at, end_at: end_at, carryover_amount: 0, this_month_amount: amount, amount: amount - w_hours)
+      elsif msum.blank? and msum_prev.present?
+        MonthlySummary.create(year: year, month: month, begin_at: begin_at, end_at: end_at, carryover_amount: msum_prev.amount, this_month_amount: amount, amount: msum_prev.amount + amount - w_hours)
         break
       elsif msum.present? and msum_prev.present?
         msum.begin_at = begin_at
         msum.end_at   = end_at
         msum.carryover_amount  = msum_prev.amount
         msum.this_month_amount = amount
-        msum.amount            = msum_prev.amount + amount - 18
+        msum.amount            = msum_prev.amount + amount - w_hours
         msum.save
+        break
+      else
         break
       end
     end

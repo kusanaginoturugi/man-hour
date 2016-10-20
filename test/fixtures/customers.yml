@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   short_name: MyString
   name: MyString
   post: MyString
@@ -9,6 +10,7 @@ one:
   rep: MyString
 
 two:
+  id: 2
   short_name: MyString
   name: MyString
   post: MyString
