@@ -1,0 +1,26 @@
+.panel.panel-default
+  .panel-heading
+    h3.panel-title
+      = t('.Change your password')
+  .panel-body
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'form-horizontal' }) do |f|
+      = devise_error_messages!
+      = f.hidden_field :reset_password_token
+      .form-group
+        .col-xs-12.col-sm-3
+          = f.label :password, t(".New password"), class: "control-label"
+        .col-xs-12.col-sm-9
+          = f.password_field :password, autofocus: true, autocomplete: "off", class: "form-control"
+          - if @minimum_password_length
+            em
+              = "(#{@minimum_password_length} #{t('.characters minimum')})"
+      .form-group
+        .col-xs-12.col-sm-3
+          = f.label :password_confirmation, t(".Confirm new password"), class: "control-label"
+        .col-xs-12.col-sm-9
+          = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
+      .form-group
+        .col-xs-12.col-sm-3
+        .col-xs-12.col-sm-9
+          = f.submit t(".Change my password"), class: "btn btn-primary"
+= render "devise/shared/links"

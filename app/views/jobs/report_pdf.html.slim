@@ -1,0 +1,70 @@
+h1
+  = t('title.monthly_jobs_report')
+h4
+  = @monthly_summary.customer.short_name
+  |  : 
+  = @date.year
+  |  年 
+  = @date.mon
+  |  月分
+.container-fluid
+  .row
+    .col-md-4
+      table.table.table-striped
+        thead
+          tr
+            th
+              | 前月繰越
+            th
+              | 当月合計
+            th
+              | 繰越
+        tbody
+          tr
+            td
+              = sprintf( "%.3f", @monthly_summary.carryover_amount )
+            td
+              = sprintf( "%.3f", @monthly_summary.this_month_amount )
+            td
+              = sprintf( "%.3f", @monthly_summary.amount )
+    .col-md-8
+  table.table.table-striped
+    thead
+      tr
+        th
+          = t('activerecord.attributes.job_type.name')
+        th
+          = t('activerecord.attributes.job.title')
+        th
+          = t('activerecord.attributes.job.detail')
+        th
+          = t('activerecord.attributes.job.outside_budget')
+        th
+          = t('activerecord.attributes.job.begin_date')
+        th
+          = t('activerecord.attributes.job.end_date')
+        th
+          = t('activerecord.attributes.job.worktime')
+    tbody
+      - @jobs.each do |job|
+        tr
+          td
+            = job.job_type.name
+          td
+            = job.title
+          td
+            = simple_format(job.detail)
+          td
+            = job.outside_budget
+          td
+            = job.begin_date
+          td
+            = job.end_date
+          td
+            = sprintf( "%.3f", job.worktime )
+      tr
+        td[colspan="5"]
+        td
+          = t('label.sum')
+        td
+          = sprintf( "%.3f", @jobs.where('outside_budget = false').sum(:worktime) )

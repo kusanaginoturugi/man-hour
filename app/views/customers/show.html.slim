@@ -1,0 +1,29 @@
+p#notice
+  = notice
+p
+  strong
+    | Short name:
+  = @customer.short_name
+p
+  strong
+    | Name:
+  = @customer.name
+p
+  strong
+    | Post:
+  = @customer.post
+p
+  strong
+    | Address1:
+  = @customer.address1
+p
+  strong
+    | Address2:
+  = @customer.address2
+p
+  strong
+    | Rep:
+  = @customer.rep
+= link_to 'Edit', edit_customer_path(@customer)
+|  | 
+= link_to 'Back', customers_path

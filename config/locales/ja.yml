@@ -20,6 +20,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ja:
+  customers:
+    index:
+      panel_title: 顧客一覧
+      Short name: 顧客名
+      Name: 顧客名
+      Post: 郵便番号
+      Address1: 住所1
+      Address2: 住所2
+      Rep: Rep
+      Select: 選択
+      Show: 表示
+      Edit: 編集
+      Destroy: 削除
+      New Customer: 新規顧客作成
 
   title:
     New_job: 作業報告新規作成

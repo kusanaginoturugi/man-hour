@@ -1,0 +1,29 @@
+.panel.panel-default
+  .panel-heading
+    h3.panel-title
+      = t(".Sign up")
+  .panel-body
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'form-horizontal'}) do |f|
+      .form-group
+        .col-xs-12.col-sm-3
+          = f.label :email, class: "control-label"
+        .col-xs-12.col-sm-9
+          = f.email_field :email, autofocus: true, class: "form-control"
+      .form-group
+        .col-xs-12.col-sm-3
+          = f.label :password, class: "control-label"
+          - if @minimum_password_length
+            = "(#{@minimum_password_length} #{t('.characters minimum')})"
+        .col-xs-12.col-sm-9
+          = f.password_field :password, autocomplete: "off", class: "form-control"
+      .form-group
+        .col-xs-12.col-sm-3
+          = f.label :password_confirmation, class: "control-label"
+        .col-xs-12.col-sm-9
+          = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
+      .form-group
+        .col-xs-12.col-sm-3
+        .col-xs-12.col-sm-9
+          = f.submit t(".Sign up"), class: "btn btn-primary"
+
+= render "devise/shared/links"

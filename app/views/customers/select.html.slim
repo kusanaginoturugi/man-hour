@@ -1,0 +1,38 @@
+h1
+  | Listing customers
+table
+  thead
+    tr
+      th
+        | Short name
+      th
+        | Name
+      th
+        | Post
+      th
+        | Address1
+      th
+        | Address2
+      th
+        | Rep
+      th[colspan="1"]
+  tbody
+    - @customers.each do |customer|
+      tr
+        td
+          = customer.short_name
+        td
+          = customer.name
+        td
+          = customer.post
+        td
+          = customer.address1
+        td
+          = customer.address2
+        td
+          = customer.rep
+        td
+          = link_to 'Select', select_customer_path(customer)
+        |  } %>
+br
+= link_to 'New Customer', new_customer_path

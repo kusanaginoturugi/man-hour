@@ -1,0 +1,58 @@
+| ﻿
+h1
+  = t('title.Listing_jobs')
+a[href="/jobs/?month=prev"]
+  | 先月
+| | 
+- tgt_date = session['tgt_date']
+= "#{tgt_date.year}年 #{tgt_date.month}月"
+|  |
+a[href="/jobs/?month=next"]
+  | 翌月
+table.table.table-striped
+  thead
+    tr
+      th
+        = t('activerecord.attributes.job_type.name')
+      th
+        = t('activerecord.attributes.customer.short_name')
+      th
+        = t('activerecord.attributes.job.title')
+      th
+        = t('activerecord.attributes.job.detail')
+      th
+        = t('activerecord.attributes.job.outside_budget')
+      th
+        = t('activerecord.attributes.job.worktime')
+      th
+        = t('activerecord.attributes.job.begin_date')
+      th
+        = t('activerecord.attributes.job.end_date')
+      th
+  tbody
+    - @jobs.each do |job|
+      tr
+        td
+          = job.job_type.name
+        td
+          = job.customer.short_name
+        td
+          = job.title
+        td
+          = simple_format(job.detail)
+        td
+          = job.outside_budget
+        td
+          = sprintf( "%.3f", job.worktime )
+        td
+          = job.begin_date
+        td
+          = job.end_date
+        td
+          = link_to 'Show', job, class: "btn btn-default"
+          = link_to 'Edit', edit_job_path(job), class: "btn btn-default"
+          = link_to 'Destroy', job, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to t('title.New_job'), new_job_path
+- if @jobs.last.present?
+  = link_to t('title.monthly_jobs_report'), action: "report", begin_date: @jobs.last.begin_date

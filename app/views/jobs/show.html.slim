@@ -1,0 +1,37 @@
+p#notice
+  = notice
+p
+  strong
+    | Job type:
+  = @job.job_type.name
+p
+  strong
+    | Customer:
+  = @job.customer.short_name
+p
+  strong
+    | Title:
+  = @job.title
+p
+  strong
+    | Detail:
+  = @job.detail
+p
+  strong
+    | OutsideBudget:
+  = @job.outside_budget
+p
+  strong
+    | Begin date:
+  = @job.begin_date
+p
+  strong
+    | End date:
+  = @job.end_date
+p
+  strong
+    | Worktime:
+  = @job.worktime
+= link_to 'Edit', edit_job_path(@job)
+|  | 
+= link_to 'Back', jobs_path

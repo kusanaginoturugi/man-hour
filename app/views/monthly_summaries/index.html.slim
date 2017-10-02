@@ -1,0 +1,45 @@
+h1
+  | Listing monthly_summaries
+table
+  thead
+    tr
+      th
+        | Year
+      th
+        | Month
+      th
+        | Begin at
+      th
+        | End at
+      th
+        | Carryover amount
+      th
+        | This month amount
+      th
+        | Amount
+      th[colspan="3"]
+  tbody
+    - @monthly_summaries.each do |monthly_summary|
+      tr
+        td
+          = monthly_summary.year
+        td
+          = monthly_summary.month
+        td
+          = monthly_summary.begin_at
+        td
+          = monthly_summary.end_at
+        td
+          = monthly_summary.carryover_amount
+        td
+          = monthly_summary.this_month_amount
+        td
+          = monthly_summary.amount
+        td
+          = link_to 'Show', monthly_summary
+        td
+          = link_to 'Edit', edit_monthly_summary_path(monthly_summary)
+        td
+          = link_to 'Destroy', monthly_summary, method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to 'New Monthly summary', new_monthly_summary_path

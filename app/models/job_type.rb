@@ -1,3 +1,3 @@
-class JobType < ActiveRecord::Base
+class JobType < ApplicationRecord
   has_many :jobs
 end

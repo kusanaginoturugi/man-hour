@@ -1,5 +1,5 @@
 # coding: utf-8
-class Job < ActiveRecord::Base
+class Job < ApplicationRecord
   attr_accessor :work_minutes
   belongs_to :job_type
   belongs_to :customer
