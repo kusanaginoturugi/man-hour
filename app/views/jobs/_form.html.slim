@@ -11,14 +11,18 @@
   dl.dl-horizontal
     dt
       b
+        = f.label :customer_id
+        | :
+    dd
+      - @customers = Customer.all
+      = f.select :customer_id, @customers.map{|t| [t.short_name, t.id]}
+    dt
+      b
         = f.label :job_type_id
         | :
     dd
       - @job_types = JobType.all
       = f.select :job_type_id, @job_types.map{|t| [t.name, t.id]}
-    dd
-      - @customers = Customer.all
-      = f.select :customer_id, @customers.map{|t| [t.short_name, t.id]}
     dt
       b
         = f.label :title
@@ -30,7 +34,7 @@
         = f.label :detail
         | :
     dd
-      = f.text_area :detail, size: "40x10"
+      = f.text_area :detail, size: "60x10"
     dt
       b
         = f.label :work_minutes

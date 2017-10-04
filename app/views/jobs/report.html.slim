@@ -1,10 +1,10 @@
 h1
   = t('title.monthly_jobs_report')
 h4
-  = @monthly_summary.customer.short_name
-  |  : 
+  = @monthly_summary.customer.short_name if @monthly_summary.customer.present?
+  |  :
   = @date.year
-  |  年 
+  |  年
   = @date.mon
   |  月分
 .container-fluid

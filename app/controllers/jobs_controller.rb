@@ -5,9 +5,10 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    #    param = params[:page]
     if session['selected_customer'].present?
       customer_id = session['selected_customer']
+    else
+      customer_id = Customer.first.id
     end
     tgt_date = Time.now
     if session['tgt_date'].present?
@@ -33,16 +34,21 @@ class JobsController < ApplicationController
   # GET /jobs/report
   # GET /jobs/report.pdf
   def report
+    if session['selected_customer'].present?
+      customer_id = session['selected_customer']
+    else
+      customer_id = Customer.first.id
+    end
     @date = DateTime.parse(params[:begin_date])
-    @jobs = Job.monthly(@date)
-    @job_summery = Job.summery(@date)
-    @monthly_summary = MonthlySummary.where(year: @date.year, month: @date.month).first
+    @jobs = Job.monthly(customer_id, @date)
+    @job_summery = Job.summery(customer_id, @date)
+    @monthly_summary = MonthlySummary.where(customer_id: customer_id, year: @date.year, month: @date.month).first
     respond_to do |format|
       format.html
       format.pdf do
          render pdf:    'jobs_pdf',
              layout:    'printer.html',
-             template:  'jobs/report_pdf.html.erb',
+             template:  'jobs/report_pdf.html.slim',
              page_size: 'A4',
              orientation: 'Landscape',
              margin:  { top: 15, bottom: 15, left: 10, right: 10 },
@@ -64,6 +70,11 @@ class JobsController < ApplicationController
   # GET /jobs/new
   def new
     @job = Job.new
+    if session['selected_customer'].present?
+      @job.customer_id = session['selected_customer']
+    else
+      @job.customer_id = Job.first.id
+    end
   end
 
   # GET /jobs/1/edit
