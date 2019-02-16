@@ -70,6 +70,6 @@ h4
           = sprintf( "%.3f", @jobs.where('outside_budget = false').sum(:worktime) )
 br
 .btn-group
-  = link_to t('label.report_pdf'),  {action: :report, begin_date: @date, :format => :pdf, class: "btn btn-default"}
-  = link_to t('label.prev_report'), {action: :report, begin_date: @date.prev_month, class: "btn btn-default"}
-  = link_to t('label.next_report'), {action: :report, begin_date: @date.next_month, class: "btn btn-default"}
+  = link_to t('label.report_pdf'),  {action: :report, begin_date: @date, :format => :pdf}, class: "btn btn-default"
+  = link_to t('label.prev_report'), {action: :report, begin_date: @date.prev_month}, class: "btn btn-default"
+  = link_to t('label.next_report'), {action: :report, begin_date: @date.next_month}, class: "btn btn-default"
