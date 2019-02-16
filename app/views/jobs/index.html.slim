@@ -56,4 +56,4 @@ br
 .btn-group
   = link_to t('title.New_job'), new_job_path, class: "btn btn-default"
   - if @jobs.last.present?
-    = link_to t('title.monthly_jobs_report'), action: "report", begin_date: @jobs.last.begin_date, class: "btn btn-default"
+    = link_to t('title.monthly_jobs_report'), {action: "report", begin_date: @jobs.last.begin_date, class: "btn btn-default"}
