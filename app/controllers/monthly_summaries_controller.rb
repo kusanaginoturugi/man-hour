@@ -4,7 +4,7 @@ class MonthlySummariesController < ApplicationController
   # GET /monthly_summaries
   # GET /monthly_summaries.json
   def index
-    @monthly_summaries = MonthlySummary.all
+    @monthly_summaries = MonthlySummary.all.order(:begin_at)
   end
 
   # GET /monthly_summaries/1
