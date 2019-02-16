@@ -3,7 +3,7 @@ h1
   = t('title.Listing_jobs')
 a[href="/jobs/?month=prev"]
   | 先月
-| | 
+| |
 - tgt_date = session['tgt_date']
 = "#{tgt_date.year}年 #{tgt_date.month}月"
 |  |
@@ -53,6 +53,7 @@ table.table.table-striped
           = link_to 'Edit', edit_job_path(job), class: "btn btn-default"
           = link_to 'Destroy', job, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
 br
-= link_to t('title.New_job'), new_job_path
-- if @jobs.last.present?
-  = link_to t('title.monthly_jobs_report'), action: "report", begin_date: @jobs.last.begin_date
+.btn-group
+  = link_to t('title.New_job'), new_job_path, class: "btn btn-default"
+  - if @jobs.last.present?
+    = link_to t('title.monthly_jobs_report'), action: "report", begin_date: @jobs.last.begin_date, class: "btn btn-default"
