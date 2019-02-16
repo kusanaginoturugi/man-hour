@@ -33,14 +33,14 @@
             td
               = monthly_summary.end_at
             td
-              = monthly_summary.carryover_amount
+              = monthly_summary.carryover_amount.round
             td
-              = monthly_summary.this_month_amount
+              = monthly_summary.this_month_amount.round
             td
-              = monthly_summary.amount
+              = monthly_summary.amount.round
             td
               .btn-group
                 = link_to 'Show', monthly_summary, class: 'btn btn-default btn-sm'
-                = link_to 'Edit', edit_monthly_summary_path(monthly_summary), class: 'btn btn-default btn-sm'
-                = link_to 'Destroy', monthly_summary, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default btn-sm'
+                = link_to 'Edit', edit_monthly_summary_path(monthly_summary), class: 'btn btn-primary btn-sm'
+                = link_to 'Destroy', monthly_summary, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-warning btn-sm'
     = link_to 'New Monthly summary', new_monthly_summary_path, class: 'btn btn-default'
