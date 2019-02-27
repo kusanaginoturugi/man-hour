@@ -60,11 +60,7 @@ jobs:
       # run tests!
       - run:
           name: run tests
-          command: |
-            mkdir ~/reports
-          command: |
-            bundle exec rails test TESTOPTS="--ci-dir=~/reports"
-          when: always
+          command: bundle exec rails test
       # collect reports
       - store_test_results:
-          path: ~/reports
+          path: ~/
