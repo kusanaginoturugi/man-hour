@@ -16,8 +16,11 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/postgres:9.4
       - image: circleci/postgres:11-alpine-postgis
+        environment:
+          - POSTGRES_USER=ubuntu
+          - POSTGRES_DB=man-hour_development
 
-    working_directory: ~/devel/rails/mam-hour
+    working_directory: ~/myapp
 
     steps:
       - checkout
@@ -47,9 +50,9 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       # Database setup
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
-      - run: bundle exec rake db:seed
+      - run: bundle exec rails db:create
+      - run: bundle exec rails db:schema:load
+      - run: bundle exec rails db:seed
 
       # run tests!
       - run:
