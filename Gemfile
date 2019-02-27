@@ -68,3 +68,4 @@ end
 gem 'devise'
 
 gem 'slim'
+gem 'rails-controller-testing'
