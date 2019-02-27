@@ -38,13 +38,6 @@ jobs:
             - v1-dependencies-
 
       - run:
-          name: Configure Bundler
-          command: |
-            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
-            source $BASH_ENV
-            gem install bundler
-
-      - run:
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
@@ -61,26 +54,17 @@ jobs:
 
       - run: bundle exec rails db:create
       - run: bundle exec rails db:schema:load
-      - run: bundle exec rails db:seed
+      # seed
+      #- run: bundle exec rails db:seed
 
       # run tests!
       - run:
           name: run tests
+          command: mkdir ~/reports
+            bundle exec rails test TESTOPTS="--ci-dir=~/reports"
           command: |
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
-              circleci tests split --split-by=timings)"
-
-            bundle exec rspec \
-              --format progress \
-              --format RspecJunitFormatter \
-              --out /tmp/test-results/rspec.xml \
-              --format progress \
-              $TEST_FILES
-
+            bundle exec rails test TESTOPTS="--ci-dir=~/reports"
+            when: always
       # collect reports
       - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
+          path: ~/reports
