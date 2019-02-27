@@ -66,3 +66,4 @@ gem 'devise'
 
 gem 'slim'
 gem 'rails-controller-testing'
+gem 'bundler', '>= 2.0.1'
