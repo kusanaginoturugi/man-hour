@@ -23,7 +23,7 @@ jobs:
       - image: circleci/postgres:11-alpine-postgis
         environment:
           POSTGRES_USER:     ubuntu
-          POSTGRES_DB:       man-hour_development
+          POSTGRES_DB:       man-hour_test
           POSTGRES_PASSWORD: ""
 
     working_directory: ~/myapp
