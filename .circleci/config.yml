@@ -62,8 +62,8 @@ jobs:
 
       - run: bundle exec rails db:create
       - run: bundle exec rails db:schema:load
-      # seed
-      #- run: bundle exec rails db:seed
+      - run: bundle exec rails db:fixtures:load
+      # bundle exec rails db:seed
 
       # run tests!
       - run:
