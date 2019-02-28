@@ -73,13 +73,11 @@ jobs:
       - store_test_results:
           path: ~/
 
-      - deploy:
+      - run:
           name: heroku deploy
           environment:
-              HEROKU_APP_NAME: man-hour
-              HEROKU_API_KEY: c95477c0-405c-4cd6-acec-c74ebba3f72e
           commend: |
-              git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 
 workflows:
   version: 2
