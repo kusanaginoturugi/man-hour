@@ -1,4 +1,4 @@
-class CreateMonthlySummaries < ActiveRecord::Migration
+class CreateMonthlySummaries < ActiveRecord::Migration[5.1]
   def change
     create_table :monthly_summaries do |t|
       t.integer :year

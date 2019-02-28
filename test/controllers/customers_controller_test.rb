@@ -1,49 +1,48 @@
 require 'test_helper'
 
-class CustomersControllerTest < ActionController::TestCase
+class CustomersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @customer = customers(:one)
   end
 
   test "should get index" do
-    get :index
+    get customers_url
     assert_response :success
-    assert_not_nil assigns(:customers)
   end
 
   test "should get new" do
-    get :new
+    get new_customer_url
     assert_response :success
   end
 
   test "should create customer" do
     assert_difference('Customer.count') do
-      post :create, customer: { address1: @customer.address1, address2: @customer.address2, name: @customer.name, post: @customer.post, rep: @customer.rep, short_name: @customer.short_name }
+      post customers_url, params: { customer: { address1: @customer.address1, address2: @customer.address2, name: @customer.name, post: @customer.post, rep: @customer.rep, short_name: @customer.short_name } }
     end
 
-    assert_redirected_to customer_path(assigns(:customer))
+    assert_redirected_to customer_url(Customer.last)
   end
 
   test "should show customer" do
-    get :show, id: @customer
+    get customer_url(@customer)
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @customer
+    get edit_customer_url(@customer)
     assert_response :success
   end
 
   test "should update customer" do
-    patch :update, id: @customer, customer: { address1: @customer.address1, address2: @customer.address2, name: @customer.name, post: @customer.post, rep: @customer.rep, short_name: @customer.short_name }
-    assert_redirected_to customer_path(assigns(:customer))
+    patch customer_url(@customer), params: { customer: { address1: @customer.address1, address2: @customer.address2, name: @customer.name, post: @customer.post, rep: @customer.rep, short_name: @customer.short_name } }
+    assert_redirected_to customer_url(@customer)
   end
 
   test "should destroy customer" do
     assert_difference('Customer.count', -1) do
-      delete :destroy, id: @customer
+      delete customer_url(@customer)
     end
 
-    assert_redirected_to customers_path
+    assert_redirected_to customers_url
   end
 end

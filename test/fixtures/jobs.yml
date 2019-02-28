@@ -12,16 +12,3 @@ one:
   worktime: 60
   outside_budget: false
   customer_id: 1
-
-two:
-  id: 2
-  job_type_id: 2
-  title: job2
-  detail: MyText
-  cost: 1
-  place: MyString
-  begin_date: 2014-12-02 11:55:34
-  end_date: 2014-12-02 12:55:34
-  worktime: 60
-  outside_budget: false
-  customer_id: 1

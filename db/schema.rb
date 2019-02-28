@@ -16,48 +16,48 @@ ActiveRecord::Schema.define(version: 20150330021314) do
   enable_extension "plpgsql"
 
   create_table "customers", force: :cascade do |t|
-    t.string   "short_name"
-    t.string   "name"
-    t.string   "post"
-    t.string   "address1"
-    t.string   "address2"
-    t.string   "rep"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "short_name"
+    t.string "name"
+    t.string "post"
+    t.string "address1"
+    t.string "address2"
+    t.string "rep"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "job_types", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "jobs", force: :cascade do |t|
-    t.integer  "job_type_id"
-    t.string   "title"
-    t.text     "detail"
-    t.integer  "cost"
-    t.string   "place"
+    t.integer "job_type_id"
+    t.string "title"
+    t.text "detail"
+    t.integer "cost"
+    t.string "place"
     t.datetime "begin_date"
     t.datetime "end_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.float    "worktime"
-    t.boolean  "outside_budget"
-    t.integer  "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "worktime"
+    t.boolean "outside_budget"
+    t.integer "customer_id"
   end
 
   create_table "monthly_summaries", force: :cascade do |t|
-    t.integer  "year"
-    t.integer  "month"
+    t.integer "year"
+    t.integer "month"
     t.datetime "begin_at"
     t.datetime "end_at"
-    t.float    "carryover_amount"
-    t.float    "this_month_amount"
-    t.float    "amount"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "customer_id"
+    t.float "carryover_amount"
+    t.float "this_month_amount"
+    t.float "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "customer_id"
   end
 
 end
