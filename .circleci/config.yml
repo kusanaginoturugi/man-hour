@@ -72,3 +72,9 @@ jobs:
       # collect reports
       - store_test_results:
           path: ~/
+
+  deployment:
+    staging:
+      branch: master
+      heroku:
+        appname: man-hour
