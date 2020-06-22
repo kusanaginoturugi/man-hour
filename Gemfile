@@ -1,7 +1,7 @@
 # coding: utf-8
 source 'https://rubygems.org'
 
-ruby '2.6.1'
+ruby '2.7.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~>5.1.0'
@@ -60,6 +60,7 @@ group :development do
   gem 'html2slim'
   gem 'pry-rails'
   gem 'rb-readline'
+  gem 'irb'
 end
 
 gem 'devise'

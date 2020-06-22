@@ -1,0 +1,85 @@
+ruby:
+  tgt_date = session['tgt_date']
+.panel.panel-default
+  .panel-heading
+    h3.panel-title
+      = t('title.search_jobs')
+  .panel-body
+    = form_with(model: @job, url: search_jobs_path, local: true) do |f|
+      - if @job.errors.any?
+        #error_explanation
+          h2
+            = pluralize(@job.errors.count, "error")
+            |  prohibited this job from being saved:
+          ul
+            - @job.errors.full_messages.each do |message|
+              li
+                = message
+      dl.dl-horizontal
+        dt
+          b
+            = f.label :title
+            | :
+        dd
+          = f.text_field :title
+        dt
+          b
+            = f.label :detail
+            | :
+        dd
+          = f.text_area :detail, size: "60x10"
+        dt
+        dd
+          .actions
+            = f.submit '検索'
+
+    - if @jobs.count > 0
+      table.table.table-striped
+        thead
+          tr
+            th
+              = t('activerecord.attributes.job_type.name')
+            th
+              = t('activerecord.attributes.customer.short_name')
+            th
+              = t('activerecord.attributes.job.title')
+            th
+              = t('activerecord.attributes.job.detail')
+            th
+              = t('activerecord.attributes.job.outside_budget')
+            th
+              = t('activerecord.attributes.job.worktime')
+            th
+              = t('activerecord.attributes.job.begin_date')
+            th
+              = t('activerecord.attributes.job.end_date')
+            th
+        tbody
+          - @jobs.each do |job|
+            tr
+              td
+                = job.job_type.name
+              td
+                = job.customer.short_name
+              td
+                = job.title
+              td
+                = simple_format(job.detail)
+              td
+                = job.outside_budget
+              td
+                = sprintf( "%.3f", job.worktime )
+              td
+                = job.begin_date
+              td
+                = job.end_date
+              td
+                .btn-group
+                  = link_to 'Show', job, class: "btn btn-default"
+                  = link_to 'Edit', edit_job_path(job), class: "btn btn-default"
+                  = link_to 'Destroy', job, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+      br
+    .btn-group
+      = link_to t('title.New_job'), new_job_path, class: "btn btn-default"
+      - if @jobs.last.present?
+        = link_to t('title.monthly_jobs_report'), {action: "report", begin_date: @jobs.last.begin_date}, class: "btn btn-default"

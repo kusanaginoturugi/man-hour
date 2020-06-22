@@ -17,7 +17,10 @@ class Job < ApplicationRecord
     if self.begin_date.present? and self.work_minutes.present?
       self.end_date = self.begin_date + self.work_minutes.to_i * 60
     end
-    self.worktime = (self.end_date - self.begin_date) / 60 / 60
+    self.worktime = 0
+    if self.end_date.present? and self.begin_date.present?
+      self.worktime = (self.end_date - self.begin_date) / 60 / 60
+    end
   end
 
   after_save do

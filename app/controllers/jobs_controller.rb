@@ -1,15 +1,29 @@
 # coding: utf-8
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
+  before_action :selected_customer, only: [:index, :report, :new, :search]
+
+  # GET  /jobs/search/
+  # POST /jobs/search/
+  def search
+    if params[:job].present?
+      @job = Job.new(job_params)
+    else
+      @job = Job.new
+    end
+    @jobs = Job.where(customer_id: @customer_id)
+    if @job.title.present? && @job.detail.present?
+      @jobs = @jobs.where("title LIKE ?",  "%#{@job.title}%").or("detail LIKE ?", "%#{@job.detail}%")
+    elsif @job.title.present?
+      @jobs = @jobs.where("title LIKE ?",  "%#{@job.title}%")
+    elsif @job.detail.present?
+      @jobs = @jobs.where("detail LIKE ?", "%#{@job.detail}%")
+    end
+    puts @jobs.to_sql
+  end
 
   # GET /jobs
-  # GET /jobs.json
   def index
-    if session['selected_customer'].present?
-      customer_id = session['selected_customer']
-    else
-      customer_id = Customer.first.id
-    end
     tgt_date = Time.now
     if session['tgt_date'].present?
       tgt_date = DateTime.parse(session['tgt_date'])
@@ -24,7 +38,7 @@ class JobsController < ApplicationController
     session['tgt_date'] = tgt_date
     date_from = tgt_date.beginning_of_month
     date_to = tgt_date.end_of_month
-    @jobs = Job.where(customer_id: customer_id, begin_date: (date_from)..(date_to))
+    @jobs = Job.where(customer_id: @customer_id, begin_date: (date_from)..(date_to))
     # if param.blank?
     #   last_page = @jobs.num_pages
     #   @jobs = Job.page(last_page)
@@ -34,15 +48,10 @@ class JobsController < ApplicationController
   # GET /jobs/report
   # GET /jobs/report.pdf
   def report
-    if session['selected_customer'].present?
-      customer_id = session['selected_customer']
-    else
-      customer_id = Customer.first.id
-    end
     @date = DateTime.parse(params[:begin_date])
-    @jobs = Job.monthly(customer_id, @date)
-    @job_summery = Job.summery(customer_id, @date)
-    @monthly_summary = MonthlySummary.where(customer_id: customer_id, year: @date.year, month: @date.month).first
+    @jobs = Job.monthly(@customer_id, @date)
+    @job_summery = Job.summery(@customer_id, @date)
+    @monthly_summary = MonthlySummary.where(customer_id: @customer_id, year: @date.year, month: @date.month).first
     respond_to do |format|
       format.html
       format.pdf do
@@ -70,11 +79,7 @@ class JobsController < ApplicationController
   # GET /jobs/new
   def new
     @job = Job.new
-    if session['selected_customer'].present?
-      @job.customer_id = session['selected_customer']
-    else
-      @job.customer_id = Job.first.id
-    end
+    @job.customer_id = @customer_id
   end
 
   # GET /jobs/1/edit
@@ -131,4 +136,13 @@ class JobsController < ApplicationController
     def job_params
       params.require(:job).permit(:job_type_id, :title, :detail, :outside_budget, :cost, :place, :begin_date, :end_date, :work_minutes, :customer_id)
     end
+
+    def selected_customer
+      if session['selected_customer'].present?
+        @customer_id = session['selected_customer']
+      else
+        @customer_id = Customer.first.id
+      end
+    end
+
 end

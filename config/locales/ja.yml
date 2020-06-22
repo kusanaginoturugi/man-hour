@@ -40,6 +40,7 @@ ja:
     Editing_job: 作業時間編集
     Listing_jobs: 作業時間一覧
     monthly_jobs_report: 月次作業報告書
+    search_jobs: 作業報告の検索
 
   label:
     report_pdf: 月次作業報告書印刷

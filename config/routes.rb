@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :jobs do
     collection do
       get 'report'
+      get 'search'
+      post 'search'
     end
   end
 
