@@ -13,9 +13,9 @@ class JobsController < ApplicationController
     end
     @jobs = Job.where(customer_id: @customer_id)
     if @job.title.present? && @job.detail.present?
-      @jobs = @jobs.where("title LIKE ?",  "%#{@job.title}%").or("detail LIKE ?", "%#{@job.detail}%")
+      @jobs = @jobs.where("title LIKE ? OR detail LIKE ?", "%#{@job.title}%", "%#{@job.detail}%")
     elsif @job.title.present?
-      @jobs = @jobs.where("title LIKE ?",  "%#{@job.title}%")
+      @jobs = @jobs.where("title LIKE ?", "%#{@job.title}%")
     elsif @job.detail.present?
       @jobs = @jobs.where("detail LIKE ?", "%#{@job.detail}%")
     end
@@ -141,7 +141,7 @@ class JobsController < ApplicationController
       if session['selected_customer'].present?
         @customer_id = session['selected_customer']
       else
-        @customer_id = Customer.first.id
+        @customer_id = Customer.first&.id
       end
     end
 

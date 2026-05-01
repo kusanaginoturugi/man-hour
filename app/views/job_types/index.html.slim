@@ -16,6 +16,6 @@ table
         td
           = link_to 'Edit', edit_job_type_path(job_type)
         td
-          = link_to 'Destroy', job_type, method: :delete, data: { confirm: 'Are you sure?' }
+          = link_to 'Destroy', job_type, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
 br
 = link_to 'New Job type', new_job_type_path
